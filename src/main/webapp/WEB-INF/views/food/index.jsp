@@ -45,13 +45,44 @@
               </div>
             </div>
             <div class="py-2">
+              <div>Price range</div>
+              <div class="container">
+                <div class="row">
+                  <div class="col input-group">
+                    <div class="input-group-text">
+                      <div class="form-check">
+                        <input class="form-check-input" id="useMinPrice" type="checkbox" value="useMinPrice"
+                               aria-label="Checkbox for following text input" ${requestDTO.minPrice == null ? "" : "checked"}>
+                        <label class="form-check-label" for="useMinPrice">Min</label>
+                      </div>
+                    </div>
+                    <input type="number" class="form-control col" name="minPrice" id="minPrice"
+                           value='<c:out value="${requestDTO.minPrice != null ? requestDTO.minPrice : \"\"}" />'
+                           autocomplete="off" ${requestDTO.minPrice != null ? "" : "disabled"}>
+                  </div>
+                  <div class="col input-group">
+                    <div class="input-group-text">
+                      <div class="form-check">
+                        <input class="form-check-input" id="useMaxPrice" type="checkbox" value="useMaxPrice"
+                               aria-label="Checkbox for following text input" ${requestDTO.maxPrice == null ? "" : "checked"}>
+                        <label class="form-check-label" for="useMaxPrice">Max</label>
+                      </div>
+                    </div>
+                    <input type="number" class="form-control col" name="maxPrice" id="maxPrice"
+                           value='<c:out value="${requestDTO.maxPrice != null ? requestDTO.maxPrice : \"\"}" />'
+                           autocomplete="off" ${requestDTO.maxPrice != null ? "" : "disabled"}>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="py-2">
               <div>Order limit range (From, To):</div>
               <div class="container">
                 <div class="row">
                   <input type="datetime-local" class="form-control col" name="rangeStart" id="rangeStart"
-                         autocomplete="off">
+                         value="${requestDTO.rangeStart}" autocomplete="off">
                   <input type="datetime-local" class="form-control col" name="rangeEnd" id="rangeEnd"
-                         autocomplete="off">
+                         value="${requestDTO.rangeEnd}" autocomplete="off">
                 </div>
               </div>
             </div>
@@ -136,6 +167,8 @@
 
     for (const [k, v] of fd.entries()) {
       if (!v) continue;
+      if (k === 'minPrice' && !useMinPrice.checked) continue
+      if (k === 'maxPrice' && !useMaxPrice.checked) continue
       if (!useSearch && (k === 'searchFor')) continue;
       const input = document.createElement("input");
       input.type = "hidden";
@@ -148,6 +181,28 @@
     realForm.method = "GET";
     realForm.action = "${pageContext.request.contextPath}/food";
     realForm.submit();
+  })
+
+
+  const minPriceInput = document.getElementById('minPrice');
+  const maxPriceInput = document.getElementById('maxPrice');
+  const useMinPrice = document.getElementById('useMinPrice');
+  const useMaxPrice = document.getElementById('useMaxPrice');
+
+  useMinPrice.addEventListener('change', (event) => {
+    if (event.target.checked) {
+      minPriceInput.removeAttribute('disabled');
+    } else {
+      minPriceInput.setAttribute('disabled', '');
+    }
+  })
+
+  useMaxPrice.addEventListener('change', (event) => {
+    if (event.target.checked) {
+      maxPriceInput.removeAttribute('disabled');
+    } else {
+      maxPriceInput.setAttribute('disabled', '');
+    }
   })
 </script>
 </body>

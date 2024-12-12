@@ -34,4 +34,19 @@ public class FoodServiceImpl implements FoodService {
     if (foodVO == null) return null;
     return modelMapper.map(foodVO, FoodViewDTO.class);
   }
+
+  @Override
+  public void createFood(FoodCreateDTO foodCreateDTO) {
+    foodMapper.createFood(modelMapper.map(foodCreateDTO, FoodVO.class));
+  }
+
+  @Override
+  public void editFood(FoodEditDTO foodEditDTO) {
+    foodMapper.updateFood(modelMapper.map(foodEditDTO, FoodVO.class));
+  }
+
+  @Override
+  public void deleteFood(long id) {
+    foodMapper.deleteFood(id);
+  }
 }

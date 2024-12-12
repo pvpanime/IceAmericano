@@ -1,7 +1,6 @@
 package dev.nemi.americano.service;
 
 import lombok.*;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -38,7 +37,6 @@ public class FoodRequestDTO {
   @Builder.Default
   private String search = "";
 
-  private Integer matchStatus;
   private LocalDateTime rangeStart;
   private LocalDateTime rangeEnd;
 
@@ -73,16 +71,11 @@ public class FoodRequestDTO {
         sb.append("&searchFor=").append(URLEncoder.encode(s, "UTF-8"));
       }
     }
-    if (search != null && !search.isEmpty()) {
-      sb.append("&search=").append(URLEncoder.encode(search, "UTF-8"));
-    }
-    if (matchStatus != null) {
-      sb.append("&matchStatus=").append(matchStatus);
-    }
-    if (rangeStart != null && rangeEnd != null) {
-      sb.append("&rangeStart=").append(rangeStart);
-      sb.append("&rangeEnd=").append(rangeEnd);
-    }
+    if (search != null && !search.isEmpty()) sb.append("&search=").append(URLEncoder.encode(search, "UTF-8"));
+    if (rangeStart != null) sb.append("&rangeStart=").append(rangeStart);
+    if (rangeEnd != null) sb.append("&rangeEnd=").append(rangeEnd);
+    if (minPrice != null) sb.append("&minPrice=").append(minPrice);
+    if (maxPrice != null) sb.append("&maxPrice=").append(maxPrice);
     return sb.toString();
   }
 

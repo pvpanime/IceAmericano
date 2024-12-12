@@ -13,5 +13,6 @@ public class FoodVO {
   String name;
   String description;
   long wonPrice;
+  LocalDateTime added;
   LocalDateTime until;
 }

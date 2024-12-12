@@ -50,4 +50,19 @@
   <select id="getFood" resultType="dev.nemi.americano.service.FoodVO">
     SELECT * FROM Food WHERE id = #{id}
   </select>
+  <insert id="createFood">
+    INSERT INTO Food (`name`, `description`, `wonPrice`, `until`)
+    VALUES (#{name}, #{description}, #{wonPrice}, #{until})
+  </insert>
+  <update id="updateFood">
+    UPDATE Food
+    SET `name` = #{name},
+        `description` = #{description},
+        `wonPrice` = #{wonPrice},
+        `until` = #{until}
+    WHERE `id` = #{id}
+  </update>
+  <delete id="deleteFood">
+    DELETE FROM Food WHERE `id` = #{id}
+  </delete>
 </mapper>

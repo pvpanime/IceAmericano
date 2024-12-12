@@ -16,5 +16,6 @@ public class FoodViewDTO {
   private String name;
   private String description;
   private long wonPrice;
+  private LocalDateTime added;
   private LocalDateTime until;
 }

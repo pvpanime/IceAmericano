@@ -10,4 +10,10 @@ public interface FoodMapper {
   long getFoodCount(FoodRequestDTO request);
 
   FoodVO getFood(long id);
+
+  void createFood(FoodVO food);
+
+  void updateFood(FoodVO food);
+
+  void deleteFood(long id);
 }

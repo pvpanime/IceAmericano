@@ -7,4 +7,10 @@ public interface FoodService {
   PaginatedDTO<FoodViewDTO> getFoods(FoodRequestDTO foodRequestDTO);
 
   FoodViewDTO getFood(long id);
+
+  void createFood(FoodCreateDTO foodCreateDTO);
+
+  void editFood(FoodEditDTO foodEditDTO);
+
+  void deleteFood(long id);
 }
