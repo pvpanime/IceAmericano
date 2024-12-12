@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org/DTD mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dev.nemi.americano.mapper.FoodMapper">
+  <sql id="search">
+    <where>
+      <if test="search != null and search.length > 0 and searchFor != null and searchFor.length > 0">
+        <foreach collection="searchFor" item="sf" open="(" close=")" separator="OR">
+          <if test="sf == 'n'.toString()">
+            `name` LIKE CONCAT('%', #{search} '%')
+          </if>
+          <if test="sf == 'd'.toString()">
+            `description` LIKE CONCAT('%', #{search}, '%')
+          </if>
+        </foreach>
+      </if>
+      <if test="minPrice != null">
+        <trim prefix="and">
+          `wonPrice` &gt;= #{minPrice}
+        </trim>
+      </if>
+      <if test="maxPrice != null">
+        <trim prefix="and">
+          `wonPrice` &lt;= #{maxPrice}
+        </trim>
+      </if>
+      <if test="rangeStart != null">
+        <trim prefix="and">
+          `until` &gt;= #{rangeStart}
+        </trim>
+      </if>
+      <if test="rangeEnd != null">
+        <trim prefix="and">
+          `until` &lt;= #{rangeEnd}
+        </trim>
+      </if>
+    </where>
+  </sql>
+  <select id="getFoods" resultType="dev.nemi.americano.service.FoodVO">
+    SELECT * FROM Food
+    <include refid="search"/>
+    ORDER BY `id`
+    LIMIT #{size} OFFSET #{skip}
+  </select>
+  <select id="getFoodCount">
+    SELECT COUNT(`id`) FROM Food
+    <include refid="search"/>
+  </select>
+  <select id="getFood" resultType="dev.nemi.americano.service.FoodVO">
+    SELECT * FROM Food WHERE id = #{id}
+  </select>
+</mapper>
