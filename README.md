@@ -2,6 +2,22 @@
 
 ![](/docs/paik.jpg)
 
+
+<!-- TOC -->
+* [IceAmericano](#iceamericano)
+* [목적](#목적)
+* [개발 환경](#개발-환경)
+* [기능 명세서](#기능-명세서)
+* [스크린샷](#스크린샷)
+  * [Foods 목록 보기](#foods-목록-보기)
+  * [Foods 1개 조회하기](#foods-1개-조회하기)
+  * [Foods 생성하기](#foods-생성하기)
+  * [Foods 검색](#foods-검색)
+  * [Foods 필터링](#foods-필터링)
+    * [최소 가격을 이용한 필터링](#최소-가격을-이용한-필터링)
+    * [최대 가격을 이용한 필터링](#최대-가격을-이용한-필터링)
+<!-- TOC -->
+
 # 목적
 
 점심시간마다 메뉴를 결정하지 못하는 나를 위하여 음식 목록을 만들었습니다.
@@ -10,7 +26,8 @@
 
 - Windows 10
 - Intellij IDEA
-- Java 17
+- Java 17 / Jakarta EE 8
+- Apache Tomcat 9
 - Spring
 - MariaDB
 
